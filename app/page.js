@@ -1,5 +1,6 @@
 import MapSection from '../components/sections/MapSection';
 import MatchmakingSection from '../components/sections/MatchmakingSection';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -124,6 +125,9 @@ export default function Home() {
           </div>
         </div>
       </main>
+      
+      {/* Footer */}
+      <Footer />
     </>
   );
 }
