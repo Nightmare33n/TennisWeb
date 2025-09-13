@@ -42,12 +42,12 @@ export default function MatchmakingSection() {
   };
 
   return (
-    <section id="matchmaking" className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <section id="matchmaking" className="py-20 bg-gradient-to-br from-white to-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="bg-indigo-600 rounded-lg p-2">
+            <div className="bg-indigo-600 rounded-ms p-2">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
@@ -60,8 +60,8 @@ export default function MatchmakingSection() {
             Conecta con jugadores cerca de ti que buscan compañero de juego
           </p>
           
-          {/* CTA Button */}
-          <button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 mb-8 flex items-center gap-3 mx-auto">
+          {/* Botón CTA con transición suave entre tonos de azul */}
+          <button className="bg-gradient-to-r from-blue-700 via-blue-500 to-blue-300 text-white px-8 py-3 rounded-md hover:from-blue-800 hover:via-blue-600 hover:to-blue-400 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 mb-8 flex items-center gap-3 mx-auto">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>

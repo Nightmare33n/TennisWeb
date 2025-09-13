@@ -257,7 +257,7 @@ export default function MapInteractive({
       <div className="mt-4 text-center text-sm text-gray-600">
         {courts.length > 0 && (
           <p>
-            📊 Mostrando {courts.length} cancha{courts.length !== 1 ? 's' : ''} de tennis
+             Mostrando {courts.length} cancha{courts.length !== 1 ? 's' : ''} de tennis
             {userLocation && ' cerca de ti'}
           </p>
         )}
