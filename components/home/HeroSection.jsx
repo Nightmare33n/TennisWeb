@@ -20,8 +20,8 @@ export default function HeroSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Conecta con jugadores de 
-              <span className="text-green-400"> tennis en México</span>
+              Sistema de emparejamiento
+              <span className="text-green-400">para buscar jugadores</span>
             </h1>
             <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
               Encuentra compañeros de juego cerca de ti, organiza partidos y mejora tu nivel. 

@@ -1,41 +1,50 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import PlayerCard from '../players/PlayerCard';
-import PlayersService from '../../lib/services/playersService';
+import PostCard from '../players/PostCard';
 
 export default function MatchmakingSection() {
-  const [players, setPlayers] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [stats, setStats] = useState({ total: 0, available: 0 });
 
   useEffect(() => {
-    loadPlayers();
+    loadPosts();
   }, [filter]);
 
-  const loadPlayers = async () => {
+  const loadPosts = async () => {
     setLoading(true);
     try {
-      let playersData;
-      switch (filter) {
-        case 'available':
-          playersData = PlayersService.getAvailablePlayersNow();
-          break;
-        case 'beginner':
-          playersData = PlayersService.getPlayersByLevel('Principiante');
-          break;
-        case 'intermediate':
-          playersData = PlayersService.getPlayersByLevel('Intermedio');
-          break;
-        case 'advanced':
-          playersData = PlayersService.getPlayersByLevel('Avanzado');
-          break;
-        default:
-          playersData = PlayersService.getMockPlayers();
+      let url = '/api/posts?limit=20';
+
+      if (filter !== 'all') {
+        if (filter === 'available') {
+          // Load posts from today or with immediate availability
+          url += '&status=active';
+        } else {
+          // Filter by level
+          url += `&level=${filter}`;
+        }
       }
-      setPlayers(playersData);
+
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setPosts(data.posts);
+
+        // Calculate stats
+        const total = data.posts.length;
+        const available = data.posts.filter(post =>
+          post.gameDetails.preferredTime.toLowerCase().includes('hoy') ||
+          post.gameDetails.preferredTime.toLowerCase().includes('ahora') ||
+          post.gameDetails.preferredTime.toLowerCase().includes('disponible')
+        ).length;
+
+        setStats({ total, available });
+      }
     } catch (error) {
-      console.error('Error loading players:', error);
+      console.error('Error loading posts:', error);
     } finally {
       setLoading(false);
     }
@@ -61,7 +70,17 @@ export default function MatchmakingSection() {
           </p>
           
           {/* Botón CTA con transición suave entre tonos de azul */}
-          <button className="bg-gradient-to-r from-blue-700 via-blue-500 to-blue-300 text-white px-8 py-3 rounded-md hover:from-blue-800 hover:via-blue-600 hover:to-blue-400 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 mb-8 flex items-center gap-3 mx-auto">
+          <button
+            onClick={() => {
+              const token = localStorage.getItem('token');
+              if (token) {
+                window.location.href = '/create-post';
+              } else {
+                alert('Necesitas iniciar sesión para crear una postulación');
+              }
+            }}
+            className="bg-gradient-to-r from-blue-700 via-blue-500 to-blue-300 text-white px-8 py-3 rounded-md hover:from-blue-800 hover:via-blue-600 hover:to-blue-400 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 mb-8 flex items-center gap-3 mx-auto"
+          >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
@@ -82,7 +101,7 @@ export default function MatchmakingSection() {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
-            Todos ({PlayersService.getMockPlayers().length})
+            {/* Todos ({PlayersService.getMockPlayers().length}) */}
           </button>
           <button
             onClick={() => setFilter('available')}
@@ -93,7 +112,7 @@ export default function MatchmakingSection() {
             }`}
           >
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            Disponibles ({PlayersService.getAvailablePlayersNow().length})
+            {/* Disponibles ({PlayersService.getAvailablePlayersNow().length}) */}
           </button>
           <button
             onClick={() => setFilter('beginner')}
@@ -138,17 +157,17 @@ export default function MatchmakingSection() {
           </div>
         )}
 
-        {/* Players Grid */}
+        {/* Posts Grid */}
         {!loading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {players.map((player) => (
-              <PlayerCard key={player.id} player={player} />
+            {posts.map((post) => (
+              <PostCard key={post._id} post={post} />
             ))}
           </div>
         )}
 
         {/* Empty State */}
-        {!loading && players.length === 0 && (
+        {!loading && posts.length === 0 && (
           <div className="text-center py-12">
             <div className="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -161,7 +180,17 @@ export default function MatchmakingSection() {
             <p className="text-gray-500 mb-6">
               Prueba con otro filtro o sé el primero en crear una postulación
             </p>
-            <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2 mx-auto">
+            <button
+              onClick={() => {
+                const token = localStorage.getItem('token');
+                if (token) {
+                  window.location.href = '/create-post';
+                } else {
+                  alert('Necesitas iniciar sesión para crear una postulación');
+                }
+              }}
+              className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2 mx-auto"
+            >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
@@ -175,19 +204,19 @@ export default function MatchmakingSection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div>
               <div className="text-3xl font-bold text-indigo-600 mb-1">
-                {PlayersService.getMockPlayers().length}
+                {stats.total}
               </div>
-              <div className="text-gray-600">Jugadores activos</div>
+              <div className="text-gray-600">Postulaciones activas</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-green-600 mb-1">
-                {PlayersService.getAvailablePlayersNow().length}
+                {stats.available}
               </div>
               <div className="text-gray-600">Disponibles hoy</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-orange-600 mb-1">
-                24h
+                2h
               </div>
               <div className="text-gray-600">Tiempo promedio de respuesta</div>
             </div>

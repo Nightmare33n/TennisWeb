@@ -54,32 +54,39 @@ export default function MapInteractive({
       const courtsData = await OverpassService.getTennisCourts(city);
       setCourts(courtsData);
     } catch (error) {
-      console.error('Error loading tennis courts:', error);
+      // Error silenciado - el usuario verá que no se cargan las canchas
     } finally {
       setLoading(false);
     }
   };
 
   const getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const location = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          setUserLocation(location);
-          
-          // Si tenemos un mapa, centrar en la ubicación del usuario
-          if (map) {
-            map.setView([location.lat, location.lng], 13);
-          }
-        },
-        (error) => {
-          console.error('Error getting location:', error);
-        }
-      );
+    if (!navigator.geolocation) {
+      return;
     }
+  
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const location = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        setUserLocation(location);
+        
+        if (map) {
+          map.setView([location.lat, location.lng], 13);
+        }
+      },
+      (error) => {
+        // Manejo silencioso de errores de geolocalización
+        // Los errores son esperados y no requieren logging en producción
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      }
+    );
   };
 
   const handleNearMeClick = async () => {
@@ -93,7 +100,7 @@ export default function MapInteractive({
         );
         setCourts(nearCourts);
       } catch (error) {
-        console.error('Error loading nearby courts:', error);
+        // Error silenciado - el usuario verá que no se cargan las canchas cercanas
       } finally {
         setLoading(false);
       }
@@ -223,7 +230,6 @@ export default function MapInteractive({
               icon={courtIcon}
               eventHandlers={{
                 click: () => {
-                  console.log('Selected court:', court);
                   if (onCourtSelect) {
                     onCourtSelect(court);
                   }
