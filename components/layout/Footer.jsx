@@ -1,3 +1,65 @@
+const footerConfig = {
+  brand: {
+    title: "Tennis Connect",
+    subtitle: "México",
+    description: "La plataforma líder para conectar jugadores de tennis en México. Encuentra compañeros de juego, organiza partidos y mejora tu nivel.",
+    features: [
+      { icon: "users", title: "Comunidad activa" },
+      { icon: "location", title: "Ubicaciones cercanas" },
+      { icon: "lightning", title: "Partidos rápidos" }
+    ]
+  },
+  stats: {
+    title: "Estadísticas",
+    items: [
+      { value: "1", label: "Jugadores activos" },
+      { value: "0", label: "Partidos organizados" },
+      { value: "15", label: "Ciudades" }
+    ]
+  },
+  contact: {
+    title: "Contacto",
+    items: [
+      { icon: "location", text: "Ciudad de México, MX" },
+      { icon: "email", text: "info@tennisconnect.mx" },
+      { icon: "clock", text: "24/7 Disponible" }
+    ]
+  },
+  footer: {
+    copyright: "Tennis Connect México. Conectando jugadores apasionados.",
+    links: [
+      { text: "Privacidad", href: "/privacy" },
+      { text: "Términos", href: "/terms" },
+      { text: "Soporte", href: "/support" }
+    ],
+    madeWith: "Hecho con ❤️ para la comunidad tenista mexicana"
+  }
+};
+
+  const getIcon = (iconName) => {
+    const icons = {
+      users: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      ),
+      location: (
+        <>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </>
+      ),
+      lightning: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      ),
+      email: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26c.67.36 1.45.36 2.12 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      ),
+      clock: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      )
+    };
+    return icons[iconName] || icons.users;
+  };
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -14,76 +76,49 @@ export default function Footer() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-white">Tennis Connect</h3>
-                <p className="text-green-400 text-sm font-medium">México</p>
+                <h3 className="text-2xl font-bold text-white">{footerConfig.brand.title}</h3>
+                <p className="text-green-400 text-sm font-medium">{footerConfig.brand.subtitle}</p>
               </div>
             </div>
             <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
-              La plataforma líder para conectar jugadores de tennis en México. 
-              Encuentra compañeros de juego, organiza partidos y mejora tu nivel.
+              {footerConfig.brand.description}
             </p>
             <div className="flex space-x-4">
-              <div className="bg-gray-800 p-3 rounded-lg">
-                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <div className="bg-gray-800 p-3 rounded-lg">
-                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <div className="bg-gray-800 p-3 rounded-lg">
-                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
+              {footerConfig.brand.features.map((feature, index) => (
+                <div key={index} className="bg-gray-800 p-3 rounded-lg" title={feature.title}>
+                  <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {getIcon(feature.icon)}
+                  </svg>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Stats Section */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-6">Estadísticas</h4>
+            <h4 className="text-lg font-semibold text-white mb-6">{footerConfig.stats.title}</h4>
             <div className="space-y-4">
-              <div>
-                <div className="text-3xl font-bold text-green-400">500+</div>
-                <div className="text-gray-300 text-sm">Jugadores activos</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-green-400">1.2K+</div>
-                <div className="text-gray-300 text-sm">Partidos organizados</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-green-400">15</div>
-                <div className="text-gray-300 text-sm">Ciudades</div>
-              </div>
+              {footerConfig.stats.items.map((stat, index) => (
+                <div key={index}>
+                  <div className="text-3xl font-bold text-green-400">{stat.value}</div>
+                  <div className="text-gray-300 text-sm">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Contact Section */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-6">Contacto</h4>
+            <h4 className="text-lg font-semibold text-white mb-6">{footerConfig.contact.title}</h4>
             <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span className="text-gray-300">Ciudad de México, MX</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26c.67.36 1.45.36 2.12 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span className="text-gray-300">info@tennisconnect.mx</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="text-gray-300">24/7 Disponible</span>
-              </div>
+              {footerConfig.contact.items.map((item, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <svg className="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {getIcon(item.icon)}
+                  </svg>
+                  <span className="text-gray-300">{item.text}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -94,30 +129,26 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {currentYear} Tennis Connect México. Conectando jugadores apasionados.
+            © {currentYear} {footerConfig.footer.copyright}
           </div>
           
           <div className="flex items-center space-x-6 text-sm text-gray-400">
-            <button className="hover:text-green-400 transition-colors">
-              Privacidad
-            </button>
-            <button className="hover:text-green-400 transition-colors">
-              Términos
-            </button>
-            <button className="hover:text-green-400 transition-colors">
-              Soporte
-            </button>
+            {footerConfig.footer.links.map((link, index) => (
+              <button key={index} className="hover:text-green-400 transition-colors">
+                {link.text}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Made with love */}
         <div className="mt-8 text-center">
           <p className="text-gray-500 text-sm flex items-center justify-center">
-            Hecho con 
+            {footerConfig.footer.madeWith.split('❤️')[0]}
             <svg className="w-4 h-4 text-red-500 mx-1" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
-            para la comunidad tenista mexicana
+            {footerConfig.footer.madeWith.split('❤️')[1]}
           </p>
         </div>
       </div>
