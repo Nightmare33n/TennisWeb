@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-6xl mx-auto px-4 z-50">
+      <header className="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-6xl mx-auto px-4 z-[999]">
         <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-lg border border-gray-100/50">
           <div className="flex justify-between items-center h-16 px-6">
             {/* Logo - Minimal */}

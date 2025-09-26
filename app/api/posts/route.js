@@ -49,8 +49,23 @@ export async function GET(request) {
 
   } catch (error) {
     console.error('Get posts error:', error);
+
+    // Handle specific database connection errors
+    if (error.name === 'DatabaseConnectionError') {
+      return NextResponse.json(
+        {
+          message: 'Error de conexión con la base de datos. Intenta nuevamente en unos momentos.',
+          error: 'DATABASE_CONNECTION_ERROR'
+        },
+        { status: 503 }
+      );
+    }
+
     return NextResponse.json(
-      { message: 'Error interno del servidor' },
+      {
+        message: 'Error interno del servidor',
+        error: 'INTERNAL_SERVER_ERROR'
+      },
       { status: 500 }
     );
   }
@@ -160,8 +175,22 @@ export async function POST(request) {
       );
     }
 
+    // Handle specific database connection errors
+    if (error.name === 'DatabaseConnectionError') {
+      return NextResponse.json(
+        {
+          message: 'Error de conexión con la base de datos. Intenta nuevamente en unos momentos.',
+          error: 'DATABASE_CONNECTION_ERROR'
+        },
+        { status: 503 }
+      );
+    }
+
     return NextResponse.json(
-      { message: 'Error interno del servidor' },
+      {
+        message: 'Error interno del servidor',
+        error: 'INTERNAL_SERVER_ERROR'
+      },
       { status: 500 }
     );
   }
