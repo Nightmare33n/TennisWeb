@@ -1,4 +1,4 @@
-import { CTAButtons } from '../ui/CTAButtons';
+import { CTAButtons } from '../tennis/ui/CTAButtons';
 
 export default function HeroSection() {
   return (

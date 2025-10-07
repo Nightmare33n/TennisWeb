@@ -1,4 +1,4 @@
-import { FeatureCard } from '../ui/FeatureCard';
+import { FeatureCard } from '../tennis/ui/FeatureCard';
 
 export default function FeaturesSection() {
   const features = [

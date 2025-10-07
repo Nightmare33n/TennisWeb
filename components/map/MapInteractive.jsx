@@ -21,14 +21,14 @@ const Popup = dynamic(
   { ssr: false }
 );
 
-import OverpassService from '../../lib/services/overpassService';
+import OverpassService from '../../libs/tennis/services/overpassService';
 import CourtMarker from './CourtMarker';
 
-export default function MapInteractive({ 
-  height = '400px', 
-  city = 'Ciudad de México',
+export default function MapInteractive({
+  height = '400px',
+  city = 'Chihuahua',
   showUserLocation = false,
-  onCourtSelect = null 
+  onCourtSelect = null
 }) {
   const [courts, setCourts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,9 +36,9 @@ export default function MapInteractive({
   const [map, setMap] = useState(null);
   const [mounted, setMounted] = useState(false);
 
-  // Coordenadas por defecto (Ciudad de México - Zócalo)
-  const defaultCenter = [19.4326, -99.1332];
-  const defaultZoom = 11;
+  // Coordenadas por defecto (Chihuahua, Chihuahua)
+  const defaultCenter = [28.6353, -106.0889];
+  const defaultZoom = 12;
 
   useEffect(() => {
     setMounted(true);

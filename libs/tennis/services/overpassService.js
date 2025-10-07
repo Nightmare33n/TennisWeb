@@ -25,6 +25,13 @@ const mexicoCitiesQueries = {
       node["sport"="tennis"]["addr:city"~"Monterrey"];
     );
     out center meta;
+  `,
+  'Chihuahua': `
+    [out:json][timeout:5];
+    (
+      node["sport"="tennis"](28.5,-106.2,28.8,-105.9);
+    );
+    out;
   `
 };
 
@@ -241,6 +248,109 @@ class OverpassService {
           courts_count: 2,
           lighting: false,
           fee: 'no'
+        }
+      ],
+      'Chihuahua': [
+        {
+          id: 'chih_1',
+          type: 'mock',
+          name: 'Ciudad Deportiva de Chihuahua',
+          lat: 28.6458,
+          lng: -106.0889,
+          address: 'Ciudad Deportiva, Chihuahua, Chih.',
+          surface: 'hard',
+          access: 'public',
+          club: false,
+          courts_count: 3,
+          lighting: true,
+          opening_hours: 'Mo-Su 06:00-22:00',
+          fee: 'yes'
+        },
+        {
+          id: 'chih_2',
+          type: 'mock',
+          name: 'Canchas de Tenis Santo Niño',
+          lat: 28.6580,
+          lng: -106.0524,
+          address: 'Santo Niño, Tecnológico s/n, Chihuahua, Chih. 31170',
+          surface: 'hard',
+          access: 'public',
+          club: false,
+          courts_count: 2,
+          lighting: true,
+          opening_hours: 'Mo-Su 06:00-23:00'
+        },
+        {
+          id: 'chih_3',
+          type: 'mock',
+          name: 'Cancha de Tennis Progreso',
+          lat: 28.6520,
+          lng: -106.1045,
+          address: 'Progreso, Av. Antonio de Deza y Ulloa s/n, Chihuahua, Chih. 31210',
+          surface: 'hard',
+          access: 'public',
+          club: false,
+          courts_count: 2,
+          lighting: true,
+          opening_hours: 'Mo-Su 06:00-20:00'
+        },
+        {
+          id: 'chih_4',
+          type: 'mock',
+          name: 'Canchas De Tenis UACH',
+          lat: 28.6390,
+          lng: -106.0770,
+          address: 'Campus Uach II, Universidad Autónoma de Chihuahua, Chih. 31125',
+          surface: 'hard',
+          access: 'public',
+          club: false,
+          courts_count: 4,
+          lighting: true,
+          opening_hours: 'Mo-Su 07:00-21:00'
+        },
+        {
+          id: 'chih_5',
+          type: 'mock',
+          name: 'SPRTENNIS Academy',
+          lat: 28.6255,
+          lng: -106.1125,
+          address: 'Fuente de los vientos, Fuentes del Valle, Chihuahua, Chih. 31207',
+          surface: 'hard',
+          access: 'private',
+          club: true,
+          courts_count: 4,
+          lighting: true,
+          opening_hours: 'Mo-Su 07:00-21:00',
+          phone: '+52 614 xxx-xxxx'
+        },
+        {
+          id: 'chih_6',
+          type: 'mock',
+          name: 'Campestre de Chihuahua',
+          lat: 28.6750,
+          lng: -106.0950,
+          address: 'Club Campestre, Chihuahua, Chih.',
+          surface: 'clay',
+          access: 'members',
+          club: true,
+          courts_count: 6,
+          lighting: true,
+          opening_hours: 'Mo-Su 06:00-22:00'
+        },
+        {
+          id: 'chih_7',
+          type: 'mock',
+          name: 'Polideportivo Luis H. Álvarez',
+          lat: 28.7195,
+          lng: -106.0906,
+          address: 'Monte Real 11740, Quintas Carolinas, Chihuahua, Chih. 31146',
+          surface: 'rubber',
+          access: 'public',
+          club: false,
+          courts_count: 2,
+          lighting: true,
+          opening_hours: 'Mo-Su 06:00-22:00',
+          fee: 'yes'
         }
       ]
     };
