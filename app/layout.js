@@ -3,6 +3,7 @@ import { getSEOTags } from "@/libs/seo";
 import ClientLayout from "@/components/LayoutClient";
 import config from "@/config";
 import "./globals.css";
+import 'leaflet/dist/leaflet.css';
 
 const font = Inter({ subsets: ["latin"] });
 
